@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     // 设置过滤器：告诉驱动我们需要拦截哪些类型的信号
     // 这里设置为拦截键盘设备（interception_is_keyboard）的所有按键动作（ALL）
     // 拦截 ALL 包含按下和弹起，这是防止按键被“粘住”的关键
+    // 参数帮助3
     interception_set_filter(Chuangjian_Shaangxiawen_0o0,
                             interception_is_keyboard,
                             INTERCEPTION_FILTER_KEY_ALL);
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 
     // 进入无限循环，持续接收并处理驱动层抛出的按键流
     // interception_wait 会阻塞线程，直到硬件产生输入动作
+    // 参数帮助4
     while (interception_receive(Chuangjian_Shaangxiawen_0o0,
                                 Shebei_0o0 = interception_wait(Chuangjian_Shaangxiawen_0o0),
                                 &Shuuru_Shuju_0o0,
@@ -62,10 +64,12 @@ int main(int argc, char *argv[])
 
         // 核心步骤：将处理完（修改后或原始）的数据包发回系统输入队列
         // 如果不执行这一步，所有的键盘输入都会被驱动“吞掉”，导致电脑无法输入
+        // 参数帮助5
         interception_send(Chuangjian_Shaangxiawen_0o0, Shebei_0o0, &Shuuru_Shuju_0o0, 1);
     }
 
     // 程序退出前销毁句柄，释放驱动资源
+    // 参数帮助6
     interception_destroy_context(Chuangjian_Shaangxiawen_0o0);
     return 0;
 }
